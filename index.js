@@ -235,14 +235,14 @@ async function envoyerQuestion(interaction, session, userId) {
   const embed = new EmbedBuilder()
     .setColor(0x2B2D31)
     .setTitle(`📖 Question ${session.current + 1}/${session.questions.length}`)
-    .setDescription(`**${q.question}**`)
+    .setDescription(`**${q.question}**\n\n🅐 ${q.options[0]}\n🅑 ${q.options[1]}\n🅒 ${q.options[2]}\n🅓 ${q.options[3]}`)
     .setFooter({ text: session.oeuvre });
 
   const row = new ActionRowBuilder().addComponents(
     ['A', 'B', 'C', 'D'].map((letter, i) =>
       new ButtonBuilder()
         .setCustomId(`qcm_rep_${userId}_${i}`)
-        .setLabel(`${letter} — ${q.options[i]}`)
+        .setLabel(letter)
         .setStyle(ButtonStyle.Secondary)
     )
   );
@@ -250,6 +250,7 @@ async function envoyerQuestion(interaction, session, userId) {
   const method = interaction.replied || interaction.deferred ? 'followUp' : 'reply';
   await interaction[method]({ embeds: [embed], components: [row], ephemeral: true });
 }
+
 
 // ─── COMMANDE /essay ─────────────────────────────────────────────────────────
 async function handleEssay(interaction) {
