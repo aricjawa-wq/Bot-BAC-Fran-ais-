@@ -227,7 +227,9 @@ La valeur de "reponse" est l'index (0=A, 1=B, 2=C, 3=D).`;
   };
   qcmSessions.set(interaction.user.id, session);
 
-  await envoyerQuestion(interaction, session, interaction.user.id);
+await interaction.editReply({ content: '⏳ Génération du QCM en cours...' });
+await envoyerQuestion(interaction, session, interaction.user.id);
+
 }
 
 async function envoyerQuestion(interaction, session, userId) {
@@ -247,8 +249,8 @@ async function envoyerQuestion(interaction, session, userId) {
     )
   );
 
-  const method = interaction.replied || interaction.deferred ? 'followUp' : 'reply';
-  await interaction[method]({ embeds: [embed], components: [row], ephemeral: true });
+await interaction.editReply({ embeds: [embed], components: [row] });
+
 }
 
 
