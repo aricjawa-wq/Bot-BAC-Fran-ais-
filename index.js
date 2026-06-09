@@ -332,7 +332,8 @@ async function envoyerQuestion(interaction, session, userId) {
     )
   );
 await new Promise(r => setTimeout(r, 500));
-  await interaction.followUp({ embeds: [embed], components: [row], ephemeral: true });
+  await interaction.followUp({ embeds: [embed], components: [row] });
+
 
 }
 
