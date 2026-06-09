@@ -662,8 +662,9 @@ client.on('interactionCreate', async interaction => {
             `XP total : **${user.xp} XP** — Niveau **${user.level}**`
           )
           .setFooter({ text: session.oeuvre });
-
-        await interaction.channel.send({ embeds: [embed] });
+console.log('Envoi du score final...');
+await interaction.channel.send({ embeds: [scoreEmbed] });
+console.log('Score envoyé !');
         qcmSessions.delete(userId);
       } else {
         await envoyerQuestion(interaction, session, userId);
