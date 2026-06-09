@@ -332,7 +332,8 @@ async function envoyerQuestion(interaction, session, userId) {
     )
   );
 
-  await interaction.editReply({ embeds: [embed], components: [row] });
+  await interaction.followUp({ embeds: [embed], components: [row], ephemeral: true });
+
 }
 
 // ─── COMMANDE /essay ─────────────────────────────────────────────────────────
