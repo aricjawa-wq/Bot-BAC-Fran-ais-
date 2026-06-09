@@ -651,6 +651,7 @@ client.on('interactionCreate', async interaction => {
       session.current++;
 
       if (session.current >= session.questions.length) {
+        console.log(`Question ${session.current}, total: ${session.questions.length}`);
         const user = getUser(userId);
         const scoreEmbed = new EmbedBuilder()
           .setColor(0x5865F2)
