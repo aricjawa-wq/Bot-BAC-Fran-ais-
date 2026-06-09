@@ -482,7 +482,7 @@ Pour chaque critère :
 
 Termine par :
 - Une note globale sur 20 (format exact: "NOTE_GLOBALE: X/20" sur une ligne séparée)
-- Un commentaire bienveillant et encourageant
+- Un commentaire realiste typique du professeur de francais
 - Les 3 priorités d'amélioration
 
 Réponds en français, de façon structurée et pédagogique.`;
@@ -516,7 +516,7 @@ Pour chaque critère :
 
 Termine par :
 - Une note globale sur 20 (format exact: "NOTE_GLOBALE: X/20" sur une ligne séparée)
-- Un commentaire bienveillant et encourageant
+- Un commentaire realiste
 - Les 3 priorités d'amélioration
 
 Réponds en français, de façon structurée et pédagogique.`;
@@ -538,7 +538,7 @@ Réponds en français, de façon structurée et pédagogique.`;
     .setColor(0x57F287)
     .setTitle(titre)
     .setDescription(correctionDisplay.length > 4096 ? correctionDisplay.substring(0, 4093) + '...' : correctionDisplay)
-    .setFooter({ text: 'Continue à travailler, tu progresses ! 💪' });
+    .setFooter({ text: 'Continue à travailler, tu progresses ! 💪 sauf si t Benjamin Chavent auquel cas tu pue la merde mdr lache les cours sah' });
 
   await interaction.editReply({ embeds: [embed] });
 
@@ -635,16 +635,16 @@ client.on('interactionCreate', async interaction => {
         .setTitle(correct ? '✅ Bonne réponse ! +10 XP' : '❌ Mauvaise réponse — 5 XP')
         .setDescription(`**Bonne réponse : ${['A', 'B', 'C', 'D'][q.reponse]} — ${q.options[q.reponse]}**\n\n💡 ${q.explication}`);
 
-      await interaction.editReply({ embeds: [embed], components: [] });
+      await interaction.channel.send({ embeds: [embed] });
+      await interaction.deferUpdate().catch(() => {});
+
 
       if (xpResult.newLevel > xpResult.oldLevel) {
         const member = await interaction.guild.members.fetch(userId).catch(() => null);
         if (member) {
           await updateRoles(interaction.guild, member, xpResult.newLevel);
-          await interaction.followUp({
-            content: `🎉 <@${userId}> passe au **niveau ${xpResult.newLevel}** — **${ROLES[xpResult.newLevel - 1].name}** !`,
-            ephemeral: false
-          });
+          await interaction.channel.send(`🎉 <@${userId}> passe au **niveau ${xpResult.newLevel}** — **${ROLES[xpResult.newLevel - 1].name}** !`);
+
         }
       }
 
