@@ -331,11 +331,11 @@ async function envoyerQuestion(interaction, session, userId) {
         .setStyle(ButtonStyle.Secondary)
     )
   );
-await new Promise(r => setTimeout(r, 500));
-  await interaction.followUp({ embeds: [embed], components: [row] });
 
-
+  await new Promise(r => setTimeout(r, 500));
+  await interaction.channel.send({ embeds: [embed], components: [row] });
 }
+
 
 // ─── COMMANDE /essay ─────────────────────────────────────────────────────────
 async function handleEssay(interaction) {
