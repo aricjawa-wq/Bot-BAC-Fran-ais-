@@ -662,7 +662,7 @@ client.on('interactionCreate', async interaction => {
           )
           .setFooter({ text: session.oeuvre });
 
-        await interaction.followUp({ embeds: [scoreEmbed], ephemeral: true });
+        await interaction.channel.send({ embeds: [embed] });
         qcmSessions.delete(userId);
       } else {
         await envoyerQuestion(interaction, session, userId);
